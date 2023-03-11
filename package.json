@@ -1,0 +1,50 @@
+{
+  "name": "flitch-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "next start",
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "eslint '*/**/*.{js,ts,tsx,jsx}'",
+    "lint-fix": "eslint --fix",
+    "prepare": "husky install",
+    "prettier-format": "prettier --write"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.3",
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "next": "13.2.3",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "tailwind-merge": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.15.0",
+    "@types/react": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "autoprefixer": "^10.4.8",
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.2.5",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "postcss": "^8.4.16",
+    "prettier": "^2.6.2",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.6.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run prettier-format",
+      "npm run lint-fix"
+    ]
+  }
+}
