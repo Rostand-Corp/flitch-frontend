@@ -1,9 +1,0 @@
-autolabeler:
-  - label: 'bug'
-    branch:
-      - '/fix\/.+/'
-    title:
-      - '/fix/i'
-  - label: 'enhancement'
-    branch:
-      - '/feature\/.+/'
