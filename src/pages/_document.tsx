@@ -21,8 +21,11 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
+          <meta name="keywords" content="Flitch" />
+          <meta name="description" content="Flitch" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="theme-color" content="#ffffff" />
+          <link rel="icon" type="image/webp" sizes="32x32" href="/logo.webp" />
         </Head>
         <body>
           <Main />

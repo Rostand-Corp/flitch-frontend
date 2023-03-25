@@ -12,16 +12,16 @@
     "prettier-format": "prettier --write"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.3",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "formik": "^2.2.9",
     "next": "13.2.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "tailwind-merge": "^1.6.0"
+    "tailwind-merge": "^1.10.0",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@svgr/webpack": "^7.0.0",
     "@types/node": "18.15.0",
     "@types/react": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
