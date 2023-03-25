@@ -25,6 +25,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
+      "@public/*": ["./public/*"],
       "@store/*": ["src/store/*"],
       "@styles/*": ["src/styles/*"],
       "@typings/*": ["src/typings/*"],

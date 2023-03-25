@@ -11,11 +11,18 @@ module.exports = {
       '@hooks': path.join(__dirname, 'src/hooks'),
       '@layouts': path.join(__dirname, 'src/layouts'),
       '@pages': path.join(__dirname, 'src/pages'),
+      '@public': path.join(__dirname, './public'),
       '@store': path.join(__dirname, 'src/store'),
       '@styles': path.join(__dirname, 'src/styles'),
       '@typings': path.join(__dirname, 'src/typings'),
       '@utils': path.join(__dirname, 'src/utils'),
     };
+
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    });
 
     return config;
   },
