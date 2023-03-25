@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  web:
+    image: flitch-frontend
+    container_name: flitch-frontend
+    restart: always
+    ports:
+      - '3001:3001'
