@@ -53,12 +53,14 @@ const SignUp: React.FC = () => {
           <div className="flex gap-5 flex-col sm:flex-row">
             <Input
               id="password"
+              type="password"
               placeholder="Password*"
               error={getError(formik, 'password')}
               {...formik.getFieldProps('password')}
             />
             <Input
               id="confirmPassword"
+              type="password"
               placeholder="Confirm Password*"
               error={getError(formik, 'confirmPassword')}
               {...formik.getFieldProps('confirmPassword')}
