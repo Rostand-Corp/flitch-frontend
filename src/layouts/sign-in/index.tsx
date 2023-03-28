@@ -3,12 +3,14 @@ import Link from 'next/link';
 
 import AuthLayout from '@components/auth-layout';
 import Button from '@components/button';
+import Checkbox from '@components/checkbox';
 import Input from '@components/input';
 import routes from '@config/routes';
-import { FormValues, initialValues, schema } from '@layouts/sign-in/utils';
 import backgroundImage from '@public/images/sign-in.jpg';
 import TelegramLogo from '@public/images/telegram.svg';
 import { getError } from '@utils/formik-helpers';
+
+import { FormValues, initialValues, schema } from './utils';
 
 const SignIn = () => {
   const formik = useFormik<FormValues>({
@@ -29,7 +31,7 @@ const SignIn = () => {
           Sign In
         </h1>
         <div className="flex flex-col gap-3 xs:gap-4 md:gap-6">
-          <div className="flex gap-5 flex-col ">
+          <div className="flex gap-5 flex-col">
             <Input
               id="email"
               placeholder="Email*"
@@ -51,15 +53,14 @@ const SignIn = () => {
             </Link>
           </div>
           <div className="flex justify-between">
-            <label className="flex justify-center items-center">
-              <input
-                type="checkbox"
+            <div className="flex justify-center items-center">
+              <Checkbox
                 id="keepSignedIn"
                 className="h-6 w-6"
                 {...formik.getFieldProps('keepSignedIn')}
               />
               <p className="mx-5">Keep me Signed In</p>
-            </label>
+            </div>
             <Button appearance="primary" type="submit">
               Submit
             </Button>
