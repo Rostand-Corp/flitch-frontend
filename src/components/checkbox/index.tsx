@@ -15,7 +15,7 @@ type InputProps = RequiredKeys<
 const Checkbox: React.FC<InputProps> = ({ className, ...props }) => (
   <label
     className={twMerge(
-      'w-7 w-7 flex justify-center items-center rounded-lg border-2 border-solid ' +
+      'w-7 h-7 flex justify-center items-center rounded-lg border-2 border-solid ' +
         'border-black border-gray-600 cursor-pointer overflow-hidden',
       className,
     )}
