@@ -21,7 +21,7 @@ const Checkbox: React.FC<InputProps> = ({ className, ...props }) => (
     )}
   >
     <input type="checkbox" {...props} className="peer hidden" />
-    <Check className="w-7 w-7 invisible peer-checked:visible" />
+    <Check className="h-7 w-7 invisible peer-checked:visible" />
   </label>
 );
 
