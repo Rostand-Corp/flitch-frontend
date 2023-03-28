@@ -59,7 +59,7 @@ const SignIn = () => {
                 className="h-6 w-6"
                 {...formik.getFieldProps('keepSignedIn')}
               />
-              <p className="mx-5">Keep me Signed In</p>
+              <p className="ml-5">Keep me Signed In</p>
             </div>
             <Button appearance="primary" type="submit">
               Submit
