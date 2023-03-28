@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import Check from '@public/images/check.svg';
+import Check from '@public/icons/check.svg';
 import { RequiredKeys } from '@typings/index';
 
 type InputProps = RequiredKeys<
