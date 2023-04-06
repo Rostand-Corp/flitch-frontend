@@ -26,8 +26,8 @@ const SignIn = () => {
         onSubmit={formik.handleSubmit}
         className="h-full flex flex-col justify-center"
       >
-        <TelegramLogo className="mx-auto mb-6 sm:mb-10 max-h-full" />
-        <h1 className="mb-9 xs:mb-[74px] font-normal text-center sm:text-left">
+        <TelegramLogo className="max-h-[160px] mx-auto mb-2 xl:mb-[47px]" />
+        <h1 className="mb-4 xl:mb-[74px] font-normal text-center sm:text-left">
           Sign In
         </h1>
         <div className="flex flex-col gap-3 xs:gap-4 md:gap-6">
