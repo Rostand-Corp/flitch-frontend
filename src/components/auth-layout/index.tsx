@@ -15,7 +15,7 @@ const AuthLayout: React.FC<Props> = ({ imageSrc, children }) => {
           className="absolute w-full h-screen object-cover"
         />
       </div>
-      <div className="w-full max-w-[600px] xxl:max-w-[760px] h-screen mx-auto px-5 flex flex-col flex-grow">
+      <div className="w-full max-w-[600px] xxl:max-w-[760px] h-screen mx-auto px-5 py-2.5 flex flex-col flex-grow">
         {children}
       </div>
     </main>
