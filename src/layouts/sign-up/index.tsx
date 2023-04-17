@@ -1,6 +1,10 @@
 import { useFormik } from 'formik';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
+import { useCallback } from 'react';
 
+import { AuthAPI } from '@api/index';
 import AuthLayout from '@components/auth-layout';
 import Button from '@components/button';
 import Input from '@components/input';
@@ -12,11 +16,24 @@ import { getError } from '@utils/formik-helpers';
 import { type FormValues, initialValues, schema } from './utils';
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
+
+  const handleSubmit = useCallback(
+    (data: FormValues) =>
+      AuthAPI.authRegisterPost({ registerModel: data }).then((data) =>
+        signIn('credentials', {
+          ...data,
+          redirect: false,
+        }).then(() => router.push(routes.home)),
+      ),
+    [router],
+  );
+
   const formik = useFormik<FormValues>({
     initialValues,
     validationSchema: schema,
     validateOnBlur: false,
-    onSubmit: (data) => console.log(data),
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -25,8 +42,8 @@ const SignUp: React.FC = () => {
         onSubmit={formik.handleSubmit}
         className="h-full flex flex-col justify-center"
       >
-        <TelegramLogo className="mx-auto mb-6 sm:mb-10" />
-        <h1 className="mb-9 xs:mb-[74px] font-normal text-center sm:text-left">
+        <TelegramLogo className="max-h-[160px] mx-auto mb-2 xl:mb-[47px]" />
+        <h1 className="mb-4 xl:mb-[74px] font-normal text-center sm:text-left">
           Sign Up
         </h1>
         <div className="flex flex-col gap-3 xs:gap-4 md:gap-6">

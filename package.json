@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "api": "openapi-generator-cli generate -i http://flitch.azurewebsites.net/swagger/v1/swagger.json -g typescript-fetch -o src/api/lib/ --additional-properties=typescriptThreePlus=true;generateAliasAsModel=true && node_modules/.bin/prettier --write \"src/api/lib/**/*.ts\"",
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
@@ -15,12 +16,14 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "formik": "^2.2.9",
     "next": "13.2.3",
+    "next-auth": "4.20.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "tailwind-merge": "^1.10.0",
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.6.0",
     "@svgr/webpack": "^7.0.0",
     "@types/node": "18.15.0",
     "@types/react": "^18.0.9",
