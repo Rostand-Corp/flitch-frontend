@@ -3,8 +3,9 @@ import Head from 'next/head';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 
-import '@styles/globals.css';
 import { TOKEN_EXPIRATION } from '@config/constants';
+
+import '@styles/globals.css';
 
 type MyAppProps = AppProps<{ session: Session }>;
 

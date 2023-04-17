@@ -1,13 +1,13 @@
-import NextAuth from 'next-auth';
+import _NextAuth from 'next-auth';
 
 declare module 'next-auth' {
   interface Session {
-    token: string;
-    expiryDate: string;
+    accessToken: string;
+    accessTokenExpires: string;
   }
 
   interface User {
-    token: string;
-    expiryDate: string;
+    accessToken: string;
+    accessTokenExpires: string;
   }
 }
