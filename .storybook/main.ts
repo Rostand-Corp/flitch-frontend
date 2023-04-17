@@ -2,12 +2,12 @@ import type { StorybookConfig } from '@storybook/nextjs';
 import path from 'path';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    'storybook-addon-mock/register',
+    'storybook-addon-mock',
     {
       name: '@storybook/addon-postcss',
       options: {
@@ -23,6 +23,9 @@ const config: StorybookConfig = {
   framework: {
     name: '@storybook/nextjs',
     options: {},
+  },
+  core: {
+    builder: '@storybook/builder-webpack5',
   },
   docs: {
     autodocs: 'tag',
@@ -43,6 +46,18 @@ const config: StorybookConfig = {
         '@typings': path.join(__dirname, 'src/typings'),
         '@utils': path.join(__dirname, 'src/utils'),
       };
+    }
+
+    // This modifies the existing image rule to exclude `.svg` files
+    // since we handle those with `@svgr/webpack`.
+    const imageRule = config.module?.rules?.find((rule) => {
+      if (typeof rule !== 'string' && rule.test instanceof RegExp) {
+        return rule.test.test('.svg');
+      }
+    });
+
+    if (imageRule && typeof imageRule !== 'string') {
+      imageRule.exclude = /\.svg$/;
     }
 
     config.module?.rules?.push({

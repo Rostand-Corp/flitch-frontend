@@ -3,7 +3,7 @@ import type { StoryObj, StoryFn } from '@storybook/react';
 import Input from '@components/input';
 
 export default {
-  title: 'components/Input',
+  title: 'components/common/Input',
   component: Input,
 } as StoryObj<typeof Input>;
 
