@@ -8,4 +8,6 @@ const config = new Configuration({
   },
 });
 
+export * from './lib/models';
+
 export const AuthAPI = new AuthApi(config);
