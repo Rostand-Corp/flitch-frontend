@@ -7,7 +7,6 @@ import NextAuth, {
 import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { TOKEN_EXPIRATION } from '@config/constants';
 import routes from '@config/routes';
 
 const sessionAge = 30 * 24 * 60 * 60; // 30 days
@@ -20,35 +19,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     },
     pages: {
       signIn: routes.signIn,
-    },
-    callbacks: {
-      async jwt({ token, user }) {
-        if (token || user) {
-          const tokenData = {} as JWT;
-          const { token: accessToken, expiryDate } = user || token;
-
-          tokenData.token = accessToken;
-          tokenData.expiryDate = expiryDate;
-
-          return tokenData;
-        }
-
-        return token;
-      },
-
-      async session({ session, token }) {
-        if (token) {
-          const sessionData: Session = {
-            ...session,
-            token: token.accessToken as string,
-            expiryDate: token.expiryDate as string,
-          };
-
-          return sessionData;
-        }
-
-        return session;
-      },
     },
     providers: [
       CredentialsProvider({
@@ -63,7 +33,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
           if (access) {
             return {
               token: access,
-              expiryDate: Date.now() + TOKEN_EXPIRATION * 1000,
+              accessTokenExpires: new Date().toISOString(),
             } as unknown as User;
           }
 
@@ -71,6 +41,35 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         },
       }),
     ],
+    callbacks: {
+      async jwt({ token, user }) {
+        if (token || user) {
+          const tokenData = {} as JWT;
+          const { accessToken, accessTokenExpires } = user || token;
+
+          tokenData.accessToken = accessToken;
+          tokenData.accessTokenExpires = accessTokenExpires;
+
+          return tokenData;
+        }
+
+        return token;
+      },
+
+      async session({ session, token }) {
+        if (token) {
+          const sessionData: Session = {
+            ...session,
+            accessToken: token.accessToken as string,
+            accessTokenExpires: token.accessTokenExpires as string,
+          };
+
+          return sessionData;
+        }
+
+        return session;
+      },
+    },
   };
 
   return NextAuth(req, res, options);

@@ -48,7 +48,7 @@ const SignIn = () => {
           </div>
           <div className="mb-10 mt-14">
             Don't have an account?{' '}
-            <Link href={routes.sighUp} className="font-semibold">
+            <Link href={routes.signUp} className="font-semibold">
               Register
             </Link>
           </div>
