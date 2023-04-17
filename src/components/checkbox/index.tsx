@@ -5,9 +5,12 @@ import Check from '@public/icons/check.svg';
 import { RequiredKeys } from '@typings/index';
 
 type InputProps = RequiredKeys<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+  Omit<
+    React.DetailedHTMLProps<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >,
+    'type'
   >,
   'id'
 >;
@@ -20,7 +23,7 @@ const Checkbox: React.FC<InputProps> = ({ className, ...props }) => (
       className,
     )}
   >
-    <input type="checkbox" {...props} className="peer hidden" />
+    <input {...props} type="checkbox" className="peer hidden" />
     <Check className="h-7 w-7 invisible peer-checked:visible" />
   </label>
 );
