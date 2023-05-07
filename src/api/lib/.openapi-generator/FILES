@@ -1,13 +1,16 @@
-.openapi-generator-ignore
 apis/AuthApi.ts
 apis/ChatApi.ts
 apis/UserApi.ts
 apis/index.ts
 index.ts
+models/AddUserToGroupChatRequest.ts
+models/ApiChatsPrivatePost400Response.ts
 models/AuthLoginPost401Response.ts
+models/ChatBriefViewResponse.ts
 models/ChatFullResponse.ts
 models/ChatRole.ts
 models/ChatType.ts
+models/ChatTypeFilter.ts
 models/ChatUserBriefResponse.ts
 models/ChatUserMinimalNoChatResponse.ts
 models/CreateGroupChatRequest.ts
@@ -15,6 +18,7 @@ models/CreatePrivateChatRequest.ts
 models/ForgotPassModel.ts
 models/JwtResult.ts
 models/LoginModel.ts
+models/MessageBriefViewResponse.ts
 models/MessageReplyResponse.ts
 models/MessageResponse.ts
 models/MessageType.ts
@@ -22,6 +26,7 @@ models/RegisterModel.ts
 models/ResetForgotPassModel.ts
 models/ResetPassModel.ts
 models/SendMessageRequest.ts
+models/UpdateChatRequest.ts
 models/UpdateMessageRequest.ts
 models/UpdateUserRequest.ts
 models/UserResponse.ts

@@ -16,52 +16,44 @@ import { exists, mapValues } from '../runtime';
 /**
  *
  * @export
- * @interface LoginModel
+ * @interface UpdateChatRequest
  */
-export interface LoginModel {
+export interface UpdateChatRequest {
   /**
-   *
+   * A name to change chat's current name for (1-50). Name cannot be changed for private chats.
    * @type {string}
-   * @memberof LoginModel
+   * @memberof UpdateChatRequest
    */
-  email: string;
-  /**
-   *
-   * @type {string}
-   * @memberof LoginModel
-   */
-  password: string;
+  name: string;
 }
 
 /**
- * Check if a given object implements the LoginModel interface.
+ * Check if a given object implements the UpdateChatRequest interface.
  */
-export function instanceOfLoginModel(value: object): boolean {
+export function instanceOfUpdateChatRequest(value: object): boolean {
   let isInstance = true;
-  isInstance = isInstance && 'email' in value;
-  isInstance = isInstance && 'password' in value;
+  isInstance = isInstance && 'name' in value;
 
   return isInstance;
 }
 
-export function LoginModelFromJSON(json: any): LoginModel {
-  return LoginModelFromJSONTyped(json, false);
+export function UpdateChatRequestFromJSON(json: any): UpdateChatRequest {
+  return UpdateChatRequestFromJSONTyped(json, false);
 }
 
-export function LoginModelFromJSONTyped(
+export function UpdateChatRequestFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): LoginModel {
+): UpdateChatRequest {
   if (json === undefined || json === null) {
     return json;
   }
   return {
-    email: json['email'],
-    password: json['password'],
+    name: json['name'],
   };
 }
 
-export function LoginModelToJSON(value?: LoginModel | null): any {
+export function UpdateChatRequestToJSON(value?: UpdateChatRequest | null): any {
   if (value === undefined) {
     return undefined;
   }
@@ -69,7 +61,6 @@ export function LoginModelToJSON(value?: LoginModel | null): any {
     return null;
   }
   return {
-    email: value.email,
-    password: value.password,
+    name: value.name,
   };
 }

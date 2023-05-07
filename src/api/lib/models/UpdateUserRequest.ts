@@ -30,6 +30,12 @@ export interface UpdateUserRequest {
    * @type {string}
    * @memberof UpdateUserRequest
    */
+  fullName?: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateUserRequest
+   */
   status?: string | null;
 }
 
@@ -55,6 +61,7 @@ export function UpdateUserRequestFromJSONTyped(
   }
   return {
     displayName: !exists(json, 'displayName') ? undefined : json['displayName'],
+    fullName: !exists(json, 'fullName') ? undefined : json['fullName'],
     status: !exists(json, 'status') ? undefined : json['status'],
   };
 }
@@ -68,6 +75,7 @@ export function UpdateUserRequestToJSON(value?: UpdateUserRequest | null): any {
   }
   return {
     displayName: value.displayName,
+    fullName: value.fullName,
     status: value.status,
   };
 }

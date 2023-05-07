@@ -46,6 +46,12 @@ export interface ChatUserBriefResponse {
   username?: string | null;
   /**
    *
+   * @type {string}
+   * @memberof ChatUserBriefResponse
+   */
+  fullname?: string | null;
+  /**
+   *
    * @type {ChatRole}
    * @memberof ChatUserBriefResponse
    */
@@ -84,6 +90,7 @@ export function ChatUserBriefResponseFromJSONTyped(
     id: !exists(json, 'id') ? undefined : json['id'],
     chatId: !exists(json, 'chatId') ? undefined : json['chatId'],
     username: !exists(json, 'username') ? undefined : json['username'],
+    fullname: !exists(json, 'fullname') ? undefined : json['fullname'],
     role: !exists(json, 'role') ? undefined : ChatRoleFromJSON(json['role']),
     joined: !exists(json, 'joined') ? undefined : new Date(json['joined']),
   };
@@ -102,6 +109,7 @@ export function ChatUserBriefResponseToJSON(
     id: value.id,
     chatId: value.chatId,
     username: value.username,
+    fullname: value.fullname,
     role: ChatRoleToJSON(value.role),
     joined: value.joined === undefined ? undefined : value.joined.toISOString(),
   };

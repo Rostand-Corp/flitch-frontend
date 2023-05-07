@@ -14,11 +14,14 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiChatsPrivatePost400Response,
   AuthLoginPost401Response,
   UpdateUserRequest,
   UserResponse,
 } from '../models';
 import {
+  ApiChatsPrivatePost400ResponseFromJSON,
+  ApiChatsPrivatePost400ResponseToJSON,
   AuthLoginPost401ResponseFromJSON,
   AuthLoginPost401ResponseToJSON,
   UpdateUserRequestFromJSON,
@@ -28,7 +31,9 @@ import {
 } from '../models';
 
 export interface ApiUsersGetRequest {
+  pageNumber?: number;
   amount?: number;
+  searchKeyWord?: string;
 }
 
 export interface ApiUsersIdDeleteRequest {
@@ -56,8 +61,16 @@ export class UserApi extends runtime.BaseAPI {
   ): Promise<runtime.ApiResponse<Array<UserResponse>>> {
     const queryParameters: any = {};
 
+    if (requestParameters.pageNumber !== undefined) {
+      queryParameters['PageNumber'] = requestParameters.pageNumber;
+    }
+
     if (requestParameters.amount !== undefined) {
-      queryParameters['amount'] = requestParameters.amount;
+      queryParameters['Amount'] = requestParameters.amount;
+    }
+
+    if (requestParameters.searchKeyWord !== undefined) {
+      queryParameters['SearchKeyWord'] = requestParameters.searchKeyWord;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -212,6 +225,49 @@ export class UserApi extends runtime.BaseAPI {
       requestParameters,
       initOverrides,
     );
+    return await response.value();
+  }
+
+  /**
+   * Retrieves CURRENT User resource
+   */
+  async apiUsersSelfGetRaw(
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<UserResponse>> {
+    const queryParameters: any = {};
+
+    const headerParameters: runtime.HTTPHeaders = {};
+
+    if (this.configuration && this.configuration.accessToken) {
+      const token = this.configuration.accessToken;
+      const tokenString = await token('Bearer', []);
+
+      if (tokenString) {
+        headerParameters['Authorization'] = `Bearer ${tokenString}`;
+      }
+    }
+    const response = await this.request(
+      {
+        path: `/api/users/self`,
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters,
+      },
+      initOverrides,
+    );
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      UserResponseFromJSON(jsonValue),
+    );
+  }
+
+  /**
+   * Retrieves CURRENT User resource
+   */
+  async apiUsersSelfGet(
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<UserResponse> {
+    const response = await this.apiUsersSelfGetRaw(initOverrides);
     return await response.value();
   }
 

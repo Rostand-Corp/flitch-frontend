@@ -16,52 +16,48 @@ import { exists, mapValues } from '../runtime';
 /**
  *
  * @export
- * @interface LoginModel
+ * @interface AddUserToGroupChatRequest
  */
-export interface LoginModel {
+export interface AddUserToGroupChatRequest {
   /**
-   *
+   * Id of the user to be added.
    * @type {string}
-   * @memberof LoginModel
+   * @memberof AddUserToGroupChatRequest
    */
-  email: string;
-  /**
-   *
-   * @type {string}
-   * @memberof LoginModel
-   */
-  password: string;
+  userId: string;
 }
 
 /**
- * Check if a given object implements the LoginModel interface.
+ * Check if a given object implements the AddUserToGroupChatRequest interface.
  */
-export function instanceOfLoginModel(value: object): boolean {
+export function instanceOfAddUserToGroupChatRequest(value: object): boolean {
   let isInstance = true;
-  isInstance = isInstance && 'email' in value;
-  isInstance = isInstance && 'password' in value;
+  isInstance = isInstance && 'userId' in value;
 
   return isInstance;
 }
 
-export function LoginModelFromJSON(json: any): LoginModel {
-  return LoginModelFromJSONTyped(json, false);
+export function AddUserToGroupChatRequestFromJSON(
+  json: any,
+): AddUserToGroupChatRequest {
+  return AddUserToGroupChatRequestFromJSONTyped(json, false);
 }
 
-export function LoginModelFromJSONTyped(
+export function AddUserToGroupChatRequestFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): LoginModel {
+): AddUserToGroupChatRequest {
   if (json === undefined || json === null) {
     return json;
   }
   return {
-    email: json['email'],
-    password: json['password'],
+    userId: json['userId'],
   };
 }
 
-export function LoginModelToJSON(value?: LoginModel | null): any {
+export function AddUserToGroupChatRequestToJSON(
+  value?: AddUserToGroupChatRequest | null,
+): any {
   if (value === undefined) {
     return undefined;
   }
@@ -69,7 +65,6 @@ export function LoginModelToJSON(value?: LoginModel | null): any {
     return null;
   }
   return {
-    email: value.email,
-    password: value.password,
+    userId: value.userId,
   };
 }

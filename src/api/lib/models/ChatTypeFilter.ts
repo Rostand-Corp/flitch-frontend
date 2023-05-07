@@ -16,23 +16,24 @@
  *
  * @export
  */
-export const ChatType = {
+export const ChatTypeFilter = {
+  All: 'All',
   Private: 'Private',
-  Group: 'Group',
 } as const;
-export type ChatType = (typeof ChatType)[keyof typeof ChatType];
+export type ChatTypeFilter =
+  (typeof ChatTypeFilter)[keyof typeof ChatTypeFilter];
 
-export function ChatTypeFromJSON(json: any): ChatType {
-  return ChatTypeFromJSONTyped(json, false);
+export function ChatTypeFilterFromJSON(json: any): ChatTypeFilter {
+  return ChatTypeFilterFromJSONTyped(json, false);
 }
 
-export function ChatTypeFromJSONTyped(
+export function ChatTypeFilterFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): ChatType {
-  return json as ChatType;
+): ChatTypeFilter {
+  return json as ChatTypeFilter;
 }
 
-export function ChatTypeToJSON(value?: ChatType | null): any {
+export function ChatTypeFilterToJSON(value?: ChatTypeFilter | null): any {
   return value as any;
 }

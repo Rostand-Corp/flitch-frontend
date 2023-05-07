@@ -16,65 +16,71 @@ import { exists, mapValues } from '../runtime';
 /**
  *
  * @export
- * @interface MessageReplyResponse
+ * @interface MessageBriefViewResponse
  */
-export interface MessageReplyResponse {
+export interface MessageBriefViewResponse {
   /**
    *
    * @type {string}
-   * @memberof MessageReplyResponse
+   * @memberof MessageBriefViewResponse
    */
   id?: string;
   /**
    *
    * @type {string}
-   * @memberof MessageReplyResponse
+   * @memberof MessageBriefViewResponse
    */
-  username?: string | null;
+  authorUserName?: string | null;
   /**
    *
    * @type {string}
-   * @memberof MessageReplyResponse
+   * @memberof MessageBriefViewResponse
    */
-  fullname?: string | null;
+  authorFullName?: string | null;
   /**
    *
    * @type {string}
-   * @memberof MessageReplyResponse
+   * @memberof MessageBriefViewResponse
    */
   content?: string | null;
   /**
    *
    * @type {Date}
-   * @memberof MessageReplyResponse
+   * @memberof MessageBriefViewResponse
    */
   timestamp?: Date;
 }
 
 /**
- * Check if a given object implements the MessageReplyResponse interface.
+ * Check if a given object implements the MessageBriefViewResponse interface.
  */
-export function instanceOfMessageReplyResponse(value: object): boolean {
+export function instanceOfMessageBriefViewResponse(value: object): boolean {
   let isInstance = true;
 
   return isInstance;
 }
 
-export function MessageReplyResponseFromJSON(json: any): MessageReplyResponse {
-  return MessageReplyResponseFromJSONTyped(json, false);
+export function MessageBriefViewResponseFromJSON(
+  json: any,
+): MessageBriefViewResponse {
+  return MessageBriefViewResponseFromJSONTyped(json, false);
 }
 
-export function MessageReplyResponseFromJSONTyped(
+export function MessageBriefViewResponseFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): MessageReplyResponse {
+): MessageBriefViewResponse {
   if (json === undefined || json === null) {
     return json;
   }
   return {
     id: !exists(json, 'id') ? undefined : json['id'],
-    username: !exists(json, 'username') ? undefined : json['username'],
-    fullname: !exists(json, 'fullname') ? undefined : json['fullname'],
+    authorUserName: !exists(json, 'authorUserName')
+      ? undefined
+      : json['authorUserName'],
+    authorFullName: !exists(json, 'authorFullName')
+      ? undefined
+      : json['authorFullName'],
     content: !exists(json, 'content') ? undefined : json['content'],
     timestamp: !exists(json, 'timestamp')
       ? undefined
@@ -82,8 +88,8 @@ export function MessageReplyResponseFromJSONTyped(
   };
 }
 
-export function MessageReplyResponseToJSON(
-  value?: MessageReplyResponse | null,
+export function MessageBriefViewResponseToJSON(
+  value?: MessageBriefViewResponse | null,
 ): any {
   if (value === undefined) {
     return undefined;
@@ -93,8 +99,8 @@ export function MessageReplyResponseToJSON(
   }
   return {
     id: value.id,
-    username: value.username,
-    fullname: value.fullname,
+    authorUserName: value.authorUserName,
+    authorFullName: value.authorFullName,
     content: value.content,
     timestamp:
       value.timestamp === undefined ? undefined : value.timestamp.toISOString(),
