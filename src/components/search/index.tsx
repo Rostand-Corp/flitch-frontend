@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import MagnifierSvg from '@public/icons/magnifier.svg';
 

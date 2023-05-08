@@ -1,5 +1,4 @@
 import { formatDistanceStrict } from 'date-fns';
-import React from 'react';
 
 import { ChatBriefViewResponse } from '@api/lib';
 import ChatAvatarSvg from '@public/icons/chat-avatar.svg';
