@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { useCallback } from 'react';
 
 import { AuthAPI } from '@api/index';
 import AuthLayout from '@components/auth-layout';
@@ -19,16 +18,13 @@ import { FormValues, initialValues, schema } from './utils';
 const SignIn: React.FC = () => {
   const router = useRouter();
 
-  const handleSubmit = useCallback(
-    (data: FormValues) =>
-      AuthAPI.authLoginPost({ loginRequest: data }).then((data) =>
-        signIn('credentials', {
-          ...data,
-          redirect: false,
-        }).then(() => router.push(routes.home)),
-      ),
-    [router],
-  );
+  const handleSubmit = (data: FormValues) =>
+    AuthAPI.authLoginPost({ loginRequest: data }).then((data) =>
+      signIn('credentials', {
+        ...data,
+        redirect: false,
+      }).then(() => router.push(routes.home)),
+    );
 
   const formik = useFormik<FormValues>({
     initialValues,
