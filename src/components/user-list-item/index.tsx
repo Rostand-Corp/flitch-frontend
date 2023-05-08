@@ -1,61 +1,64 @@
-import { formatDistanceStrict } from 'date-fns';
+import { Dispatch, SetStateAction } from 'react';
 
 import { ChatBriefViewResponse } from '@api/index';
+import { getDateDistance } from '@components/user-list-item/utils';
 import ChatAvatarSvg from '@public/icons/chat-avatar.svg';
 import GroupAvatarSvg from '@public/icons/group-avatar.svg';
 
-const userId = 'user001'; //temp value: logged in user id
-const unreadableMessages = 32; //temp value: number of unread messages
+const userId = 'user001'; //temporary variable
+const unreadableMessages = 32; //temporary variable
 
-const UserListItem: React.FC<{ item: ChatBriefViewResponse }> = ({ item }) => {
+interface Props {
+  item: ChatBriefViewResponse;
+  setContentIsVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+const UserListItem: React.FC<Props> = ({ item, setContentIsVisible }) => {
   const { chatName, participants, lastMessage } = item;
+  const avatarStyles = 'mr-[10px] w-10 h-10 min-w-[40px] min-h-[40px]';
+
   const title = chatName
     ? chatName
     : participants
-        ?.filter((user) => user.id !== userId)
-        .map((value) => value.username)
-        .toString() || 'New Chat';
-  const time = formatDistanceStrict(
-    lastMessage?.timestamp || new Date(),
-    new Date(),
-  );
+        ?.flatMap((item) => (item.id === userId ? [] : item.username))
+        .join(', ');
+
+  const time = lastMessage?.timestamp
+    ? getDateDistance(lastMessage?.timestamp)
+    : 'Recently';
 
   return (
-    <div className="px-[20px] py-[5px] mb-[5px] flex items-center">
+    <li
+      className="px-[10px] py-[5px] mb-[5px] mx-[10px] rounded-xl flex items-center
+      cursor-pointer transition-all duration-300 ease-in-out hover:bg-primary-black/5"
+      onClick={() => setContentIsVisible((prev: boolean) => !prev)}
+    >
       {chatName ? (
-        <GroupAvatarSvg
-          className={'mr-[10px] w-[40px] h-[40px] min-w-[40px] min-h-[40px]'}
-        />
+        <GroupAvatarSvg className={avatarStyles} />
       ) : (
-        <ChatAvatarSvg
-          className={'mr-[10px] w-[40px] h-[40px] min-w-[40px] min-h-[40px]'}
-        />
+        <ChatAvatarSvg className={avatarStyles} />
       )}
       <div className="flex-1 mr-[10px]">
         <b className="font-medium line-clamp-1">{title}</b>
         <p className="text-primary-black/60 line-clamp-1">
-          {chatName ? (
+          {chatName && (
             <span className="text-primary-blue">
-              {lastMessage?.authorUserName + ': '}
+              {`${lastMessage?.authorUserName}: `}
             </span>
-          ) : (
-            ''
           )}
           {lastMessage?.content}
         </p>
       </div>
       <div className="flex flex-col items-end">
-        <span className="mb-[5px] whitespace-nowrap">
-          {time === '0 seconds' ? 'Now' : time}
-        </span>
+        <span className="mb-[5px] whitespace-nowrap">{time}</span>
         <span
           className="rounded-2xl bg-primary-blue text-primary-white
-         w-[28px] h-[24px] flex items-center justify-center"
+         w-7 h-6 flex items-center justify-center"
         >
           {unreadableMessages}
         </span>
       </div>
-    </div>
+    </li>
   );
 };
 

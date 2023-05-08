@@ -8,10 +8,17 @@ import MenuSvg from '@public/icons/menu.svg';
 import { chats } from './utils';
 
 const Home: React.FC = () => {
-  const [contentIsVisible] = useState(false);
+  const [contentIsVisible, setContentIsVisible] = useState(false);
 
   const memoizedChatList = useMemo(
-    () => chats.map((item) => <UserListItem key={item.id} item={item} />),
+    () =>
+      chats.map((item) => (
+        <UserListItem
+          key={item.id}
+          item={item}
+          setContentIsVisible={setContentIsVisible}
+        />
+      )),
     [],
   );
 
