@@ -25,7 +25,8 @@ const HomeLayout: React.FC<Props> = ({
       </div>
       <div
         className={twMerge(
-          'transition-all duration-500 ease-in-out overflow-hidden lg:basis-4/6',
+          'transition-all duration-500 ease-in-out overflow-hidden ' +
+            'lg:basis-4/6 bg-gradient-to-br from-[#8EC5FC] to-[#E0C3FC]',
           contentIsVisible
             ? 'basis-full'
             : 'basis-0 xs:basis-1/3 sm:basis-2/4 md:basis-3/5',

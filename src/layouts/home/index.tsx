@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Chat from '@components/chat-background';
 import HomeLayout from '@components/home-layout';
 import Search from '@components/search';
 import MenuSvg from '@public/icons/menu.svg';
@@ -28,11 +27,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       }
-      content={
-        <Chat>
-          <div>Hello World!</div>
-        </Chat>
-      }
+      content={<div>Hello World!</div>}
     />
   );
 };
