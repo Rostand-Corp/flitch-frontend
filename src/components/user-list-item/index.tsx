@@ -1,6 +1,6 @@
 import { formatDistanceStrict } from 'date-fns';
 
-import { ChatBriefViewResponse } from '@api/lib';
+import { ChatBriefViewResponse } from '@api/index';
 import ChatAvatarSvg from '@public/icons/chat-avatar.svg';
 import GroupAvatarSvg from '@public/icons/group-avatar.svg';
 
