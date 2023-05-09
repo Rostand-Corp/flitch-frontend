@@ -14,19 +14,32 @@
 
 import * as runtime from '../runtime';
 import type {
+  AddUserToGroupChatRequest,
+  ApiChatsPrivatePost400Response,
   AuthLoginPost401Response,
+  ChatBriefViewResponse,
   ChatFullResponse,
+  ChatTypeFilter,
   CreateGroupChatRequest,
   CreatePrivateChatRequest,
   MessageResponse,
   SendMessageRequest,
+  UpdateChatRequest,
   UpdateMessageRequest,
 } from '../models';
 import {
+  AddUserToGroupChatRequestFromJSON,
+  AddUserToGroupChatRequestToJSON,
+  ApiChatsPrivatePost400ResponseFromJSON,
+  ApiChatsPrivatePost400ResponseToJSON,
   AuthLoginPost401ResponseFromJSON,
   AuthLoginPost401ResponseToJSON,
+  ChatBriefViewResponseFromJSON,
+  ChatBriefViewResponseToJSON,
   ChatFullResponseFromJSON,
   ChatFullResponseToJSON,
+  ChatTypeFilterFromJSON,
+  ChatTypeFilterToJSON,
   CreateGroupChatRequestFromJSON,
   CreateGroupChatRequestToJSON,
   CreatePrivateChatRequestFromJSON,
@@ -35,18 +48,25 @@ import {
   MessageResponseToJSON,
   SendMessageRequestFromJSON,
   SendMessageRequestToJSON,
+  UpdateChatRequestFromJSON,
+  UpdateChatRequestToJSON,
   UpdateMessageRequestFromJSON,
   UpdateMessageRequestToJSON,
 } from '../models';
 
 export interface ApiChatsChatIdGetRequest {
   chatId: string;
-  flag?: string;
+}
+
+export interface ApiChatsChatIdLeaveDeleteRequest {
+  chatId: string;
 }
 
 export interface ApiChatsChatIdMessagesGetRequest {
   chatId: string;
+  pageNumber?: number;
   amount?: number;
+  searchKeyWord?: string;
   before?: string;
 }
 
@@ -66,8 +86,20 @@ export interface ApiChatsChatIdMessagesPostRequest {
   sendMessageRequest?: SendMessageRequest;
 }
 
+export interface ApiChatsChatIdParticipantsPostRequest {
+  chatId: string;
+  addUserToGroupChatRequest?: AddUserToGroupChatRequest;
+}
+
+export interface ApiChatsChatIdPutRequest {
+  chatId: string;
+  updateChatRequest?: UpdateChatRequest;
+}
+
 export interface ApiChatsGetRequest {
+  pageNumber?: number;
   amount?: number;
+  filter?: ChatTypeFilter;
 }
 
 export interface ApiChatsGroupPostRequest {
@@ -100,10 +132,6 @@ export class ChatApi extends runtime.BaseAPI {
     }
 
     const queryParameters: any = {};
-
-    if (requestParameters.flag !== undefined) {
-      queryParameters['Flag'] = requestParameters.flag;
-    }
 
     const headerParameters: runtime.HTTPHeaders = {};
 
@@ -148,6 +176,67 @@ export class ChatApi extends runtime.BaseAPI {
   }
 
   /**
+   * Leaves the chat for the current user
+   */
+  async apiChatsChatIdLeaveDeleteRaw(
+    requestParameters: ApiChatsChatIdLeaveDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<MessageResponse>> {
+    if (
+      requestParameters.chatId === null ||
+      requestParameters.chatId === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'chatId',
+        'Required parameter requestParameters.chatId was null or undefined when calling apiChatsChatIdLeaveDelete.',
+      );
+    }
+
+    const queryParameters: any = {};
+
+    const headerParameters: runtime.HTTPHeaders = {};
+
+    if (this.configuration && this.configuration.accessToken) {
+      const token = this.configuration.accessToken;
+      const tokenString = await token('Bearer', []);
+
+      if (tokenString) {
+        headerParameters['Authorization'] = `Bearer ${tokenString}`;
+      }
+    }
+    const response = await this.request(
+      {
+        path: `/api/chats/{chatId}/leave`.replace(
+          `{${'chatId'}}`,
+          encodeURIComponent(String(requestParameters.chatId)),
+        ),
+        method: 'DELETE',
+        headers: headerParameters,
+        query: queryParameters,
+      },
+      initOverrides,
+    );
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      MessageResponseFromJSON(jsonValue),
+    );
+  }
+
+  /**
+   * Leaves the chat for the current user
+   */
+  async apiChatsChatIdLeaveDelete(
+    requestParameters: ApiChatsChatIdLeaveDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<MessageResponse> {
+    const response = await this.apiChatsChatIdLeaveDeleteRaw(
+      requestParameters,
+      initOverrides,
+    );
+    return await response.value();
+  }
+
+  /**
    * Retrieves Chat\'s messages
    */
   async apiChatsChatIdMessagesGetRaw(
@@ -166,8 +255,16 @@ export class ChatApi extends runtime.BaseAPI {
 
     const queryParameters: any = {};
 
+    if (requestParameters.pageNumber !== undefined) {
+      queryParameters['PageNumber'] = requestParameters.pageNumber;
+    }
+
     if (requestParameters.amount !== undefined) {
       queryParameters['Amount'] = requestParameters.amount;
+    }
+
+    if (requestParameters.searchKeyWord !== undefined) {
+      queryParameters['SearchKeyWord'] = requestParameters.searchKeyWord;
     }
 
     if (requestParameters.before !== undefined) {
@@ -438,16 +535,156 @@ export class ChatApi extends runtime.BaseAPI {
   }
 
   /**
+   * Adds the User to the Chat
+   */
+  async apiChatsChatIdParticipantsPostRaw(
+    requestParameters: ApiChatsChatIdParticipantsPostRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<MessageResponse>> {
+    if (
+      requestParameters.chatId === null ||
+      requestParameters.chatId === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'chatId',
+        'Required parameter requestParameters.chatId was null or undefined when calling apiChatsChatIdParticipantsPost.',
+      );
+    }
+
+    const queryParameters: any = {};
+
+    const headerParameters: runtime.HTTPHeaders = {};
+
+    headerParameters['Content-Type'] = 'application/json';
+
+    if (this.configuration && this.configuration.accessToken) {
+      const token = this.configuration.accessToken;
+      const tokenString = await token('Bearer', []);
+
+      if (tokenString) {
+        headerParameters['Authorization'] = `Bearer ${tokenString}`;
+      }
+    }
+    const response = await this.request(
+      {
+        path: `/api/chats/{chatId}/participants`.replace(
+          `{${'chatId'}}`,
+          encodeURIComponent(String(requestParameters.chatId)),
+        ),
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: AddUserToGroupChatRequestToJSON(
+          requestParameters.addUserToGroupChatRequest,
+        ),
+      },
+      initOverrides,
+    );
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      MessageResponseFromJSON(jsonValue),
+    );
+  }
+
+  /**
+   * Adds the User to the Chat
+   */
+  async apiChatsChatIdParticipantsPost(
+    requestParameters: ApiChatsChatIdParticipantsPostRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<MessageResponse> {
+    const response = await this.apiChatsChatIdParticipantsPostRaw(
+      requestParameters,
+      initOverrides,
+    );
+    return await response.value();
+  }
+
+  /**
+   * ## Remarks  ### Business rules  + Chat name must be less than 50 characters long.  + You cannot change a name of a private chat.
+   * Updates the Chat
+   */
+  async apiChatsChatIdPutRaw(
+    requestParameters: ApiChatsChatIdPutRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<MessageResponse>> {
+    if (
+      requestParameters.chatId === null ||
+      requestParameters.chatId === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'chatId',
+        'Required parameter requestParameters.chatId was null or undefined when calling apiChatsChatIdPut.',
+      );
+    }
+
+    const queryParameters: any = {};
+
+    const headerParameters: runtime.HTTPHeaders = {};
+
+    headerParameters['Content-Type'] = 'application/json';
+
+    if (this.configuration && this.configuration.accessToken) {
+      const token = this.configuration.accessToken;
+      const tokenString = await token('Bearer', []);
+
+      if (tokenString) {
+        headerParameters['Authorization'] = `Bearer ${tokenString}`;
+      }
+    }
+    const response = await this.request(
+      {
+        path: `/api/chats/{chatId}`.replace(
+          `{${'chatId'}}`,
+          encodeURIComponent(String(requestParameters.chatId)),
+        ),
+        method: 'PUT',
+        headers: headerParameters,
+        query: queryParameters,
+        body: UpdateChatRequestToJSON(requestParameters.updateChatRequest),
+      },
+      initOverrides,
+    );
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      MessageResponseFromJSON(jsonValue),
+    );
+  }
+
+  /**
+   * ## Remarks  ### Business rules  + Chat name must be less than 50 characters long.  + You cannot change a name of a private chat.
+   * Updates the Chat
+   */
+  async apiChatsChatIdPut(
+    requestParameters: ApiChatsChatIdPutRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<MessageResponse> {
+    const response = await this.apiChatsChatIdPutRaw(
+      requestParameters,
+      initOverrides,
+    );
+    return await response.value();
+  }
+
+  /**
    * Retrieves current user\'s Chats
    */
   async apiChatsGetRaw(
     requestParameters: ApiChatsGetRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<ChatFullResponse>>> {
+  ): Promise<runtime.ApiResponse<Array<ChatBriefViewResponse>>> {
     const queryParameters: any = {};
+
+    if (requestParameters.pageNumber !== undefined) {
+      queryParameters['PageNumber'] = requestParameters.pageNumber;
+    }
 
     if (requestParameters.amount !== undefined) {
       queryParameters['Amount'] = requestParameters.amount;
+    }
+
+    if (requestParameters.filter !== undefined) {
+      queryParameters['Filter'] = requestParameters.filter;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -471,7 +708,7 @@ export class ChatApi extends runtime.BaseAPI {
     );
 
     return new runtime.JSONApiResponse(response, (jsonValue) =>
-      jsonValue.map(ChatFullResponseFromJSON),
+      jsonValue.map(ChatBriefViewResponseFromJSON),
     );
   }
 
@@ -481,7 +718,7 @@ export class ChatApi extends runtime.BaseAPI {
   async apiChatsGet(
     requestParameters: ApiChatsGetRequest = {},
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<ChatFullResponse>> {
+  ): Promise<Array<ChatBriefViewResponse>> {
     const response = await this.apiChatsGetRaw(
       requestParameters,
       initOverrides,
