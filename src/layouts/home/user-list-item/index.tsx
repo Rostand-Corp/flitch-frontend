@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import { ChatBriefViewResponse } from '@api/index';
-import { getDateDistance } from '@components/user-list-item/utils';
+import { getDateDistance } from '@layouts/home/user-list-item/utils';
 import ChatAvatarSvg from '@public/icons/chat-avatar.svg';
 import GroupAvatarSvg from '@public/icons/group-avatar.svg';
 

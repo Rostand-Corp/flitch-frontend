@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import Search from '@components/search';
-import UserListItem from '@components/user-list-item';
 import MenuSvg from '@public/icons/menu.svg';
+import Search from 'src/layouts/home/search';
+import UserListItem from 'src/layouts/home/user-list-item';
 
 import { chats } from './utils';
 
