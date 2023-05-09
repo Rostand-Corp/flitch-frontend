@@ -36,6 +36,12 @@ export interface UserResponse {
    * @type {string}
    * @memberof UserResponse
    */
+  fullName?: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof UserResponse
+   */
   status?: string | null;
   /**
    *
@@ -68,6 +74,7 @@ export function UserResponseFromJSONTyped(
   return {
     id: !exists(json, 'id') ? undefined : json['id'],
     displayName: !exists(json, 'displayName') ? undefined : json['displayName'],
+    fullName: !exists(json, 'fullName') ? undefined : json['fullName'],
     status: !exists(json, 'status') ? undefined : json['status'],
     colorHexCode: !exists(json, 'colorHexCode')
       ? undefined
@@ -85,6 +92,7 @@ export function UserResponseToJSON(value?: UserResponse | null): any {
   return {
     id: value.id,
     displayName: value.displayName,
+    fullName: value.fullName,
     status: value.status,
     colorHexCode: value.colorHexCode,
   };

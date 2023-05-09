@@ -17,9 +17,9 @@
  * @export
  */
 export const MessageType = {
-  NUMBER_0: 0,
-  NUMBER_1: 1,
-  NUMBER_2: 2,
+  Default: 'Default',
+  AdminOnly: 'AdminOnly',
+  System: 'System',
 } as const;
 export type MessageType = (typeof MessageType)[keyof typeof MessageType];
 

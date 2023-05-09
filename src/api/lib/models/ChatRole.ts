@@ -17,8 +17,8 @@
  * @export
  */
 export const ChatRole = {
-  NUMBER_0: 0,
-  NUMBER_1: 1,
+  Participant: 'Participant',
+  Creator: 'Creator',
 } as const;
 export type ChatRole = (typeof ChatRole)[keyof typeof ChatRole];
 

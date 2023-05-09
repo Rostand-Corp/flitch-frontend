@@ -15,28 +15,28 @@
 import * as runtime from '../runtime';
 import type {
   AuthLoginPost401Response,
-  ForgotPassModel,
+  ForgotPassRequest,
   JwtResult,
-  LoginModel,
-  RegisterModel,
-  ResetForgotPassModel,
-  ResetPassModel,
+  LoginRequest,
+  RegisterRequest,
+  ResetForgotPassRequest,
+  ResetPassRequest,
 } from '../models';
 import {
   AuthLoginPost401ResponseFromJSON,
   AuthLoginPost401ResponseToJSON,
-  ForgotPassModelFromJSON,
-  ForgotPassModelToJSON,
+  ForgotPassRequestFromJSON,
+  ForgotPassRequestToJSON,
   JwtResultFromJSON,
   JwtResultToJSON,
-  LoginModelFromJSON,
-  LoginModelToJSON,
-  RegisterModelFromJSON,
-  RegisterModelToJSON,
-  ResetForgotPassModelFromJSON,
-  ResetForgotPassModelToJSON,
-  ResetPassModelFromJSON,
-  ResetPassModelToJSON,
+  LoginRequestFromJSON,
+  LoginRequestToJSON,
+  RegisterRequestFromJSON,
+  RegisterRequestToJSON,
+  ResetForgotPassRequestFromJSON,
+  ResetForgotPassRequestToJSON,
+  ResetPassRequestFromJSON,
+  ResetPassRequestToJSON,
 } from '../models';
 
 export interface AuthConfirmEmailPostRequest {
@@ -44,23 +44,23 @@ export interface AuthConfirmEmailPostRequest {
 }
 
 export interface AuthForgotPasswordPostRequest {
-  forgotPassModel?: ForgotPassModel;
+  forgotPassRequest?: ForgotPassRequest;
 }
 
 export interface AuthLoginPostRequest {
-  loginModel?: LoginModel;
+  loginRequest?: LoginRequest;
 }
 
 export interface AuthRegisterPostRequest {
-  registerModel?: RegisterModel;
+  registerRequest?: RegisterRequest;
 }
 
 export interface AuthResetForgotPasswordPostRequest {
-  resetForgotPassModel?: ResetForgotPassModel;
+  resetForgotPassRequest?: ResetForgotPassRequest;
 }
 
 export interface AuthResetPasswordPostRequest {
-  resetPassModel?: ResetPassModel;
+  resetPassRequest?: ResetPassRequest;
 }
 
 /**
@@ -150,7 +150,7 @@ export class AuthApi extends runtime.BaseAPI {
         method: 'POST',
         headers: headerParameters,
         query: queryParameters,
-        body: ForgotPassModelToJSON(requestParameters.forgotPassModel),
+        body: ForgotPassRequestToJSON(requestParameters.forgotPassRequest),
       },
       initOverrides,
     );
@@ -195,7 +195,7 @@ export class AuthApi extends runtime.BaseAPI {
         method: 'POST',
         headers: headerParameters,
         query: queryParameters,
-        body: LoginModelToJSON(requestParameters.loginModel),
+        body: LoginRequestToJSON(requestParameters.loginRequest),
       },
       initOverrides,
     );
@@ -246,7 +246,7 @@ export class AuthApi extends runtime.BaseAPI {
         method: 'POST',
         headers: headerParameters,
         query: queryParameters,
-        body: RegisterModelToJSON(requestParameters.registerModel),
+        body: RegisterRequestToJSON(requestParameters.registerRequest),
       },
       initOverrides,
     );
@@ -337,8 +337,8 @@ export class AuthApi extends runtime.BaseAPI {
         method: 'POST',
         headers: headerParameters,
         query: queryParameters,
-        body: ResetForgotPassModelToJSON(
-          requestParameters.resetForgotPassModel,
+        body: ResetForgotPassRequestToJSON(
+          requestParameters.resetForgotPassRequest,
         ),
       },
       initOverrides,
@@ -384,7 +384,7 @@ export class AuthApi extends runtime.BaseAPI {
         method: 'POST',
         headers: headerParameters,
         query: queryParameters,
-        body: ResetPassModelToJSON(requestParameters.resetPassModel),
+        body: ResetPassRequestToJSON(requestParameters.resetPassRequest),
       },
       initOverrides,
     );

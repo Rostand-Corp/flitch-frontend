@@ -31,6 +31,12 @@ export interface ChatUserMinimalNoChatResponse {
    * @memberof ChatUserMinimalNoChatResponse
    */
   name?: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof ChatUserMinimalNoChatResponse
+   */
+  fullname?: string | null;
 }
 
 /**
@@ -60,6 +66,7 @@ export function ChatUserMinimalNoChatResponseFromJSONTyped(
   return {
     id: !exists(json, 'id') ? undefined : json['id'],
     name: !exists(json, 'name') ? undefined : json['name'],
+    fullname: !exists(json, 'fullname') ? undefined : json['fullname'],
   };
 }
 
@@ -75,5 +82,6 @@ export function ChatUserMinimalNoChatResponseToJSON(
   return {
     id: value.id,
     name: value.name,
+    fullname: value.fullname,
   };
 }
