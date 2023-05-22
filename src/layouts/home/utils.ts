@@ -1,4 +1,4 @@
-import { ChatBriefViewResponse } from '@api/index';
+import { ChatBriefViewResponse } from '@api/lib';
 
 export const chats: ChatBriefViewResponse[] = [
   {
@@ -58,7 +58,7 @@ export const chats: ChatBriefViewResponse[] = [
       authorUserName: 'user3',
       authorFullName: 'Bob Johnson',
       content: "Hey John, what's up?",
-      timestamp: new Date('2023-05-02T12:10:00Z'),
+      timestamp: new Date('2022-05-02T12:10:00Z'),
     },
   },
 ];

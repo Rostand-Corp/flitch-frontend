@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import MenuSvg from '@public/icons/menu.svg';
@@ -10,20 +10,18 @@ import { chats } from './utils';
 const Home: React.FC = () => {
   const [contentIsVisible, setContentIsVisible] = useState(false);
 
-  const memoizedChatList = useMemo(
+  const onClick = useCallback(() => setContentIsVisible((prev) => !prev), []);
+
+  const mappedChatItems = useMemo(
     () =>
       chats.map((item) => (
-        <UserListItem
-          key={item.id}
-          item={item}
-          setContentIsVisible={setContentIsVisible}
-        />
+        <UserListItem key={item.id} item={item} onClick={onClick} />
       )),
     [],
   );
 
   return (
-    <main
+    <div
       className={twMerge(
         'w-full min-h-screen grid transition-all duration-500' +
           'lg:grid-cols-[30%_70%] xl:grid-cols-[25%_75%]',
@@ -39,15 +37,15 @@ const Home: React.FC = () => {
             <Search />
           </div>
 
-          <ul className="flex flex-col pt-[10px] basis-full overflow-x-hidden overflow-y-auto">
-            {memoizedChatList}
-          </ul>
+          <div className="flex flex-col pt-[10px] basis-full overflow-x-hidden overflow-y-auto">
+            {mappedChatItems}
+          </div>
         </div>
       </aside>
-      <div className="h-screen overflow-hidden bg-gradient-to-br from-[#8EC5FC] to-[#E0C3FC]">
+      <main className="h-screen overflow-hidden bg-gradient-to-br from-[#8EC5FC] to-[#E0C3FC]">
         <div>Hello World!</div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 

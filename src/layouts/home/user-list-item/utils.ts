@@ -1,9 +1,12 @@
-import { formatDistanceStrict } from 'date-fns';
+import { ChatUserBriefResponse } from '@api/lib';
 
-export const getDateDistance = (date: Date | string | number) => {
-  const time = formatDistanceStrict(new Date(date), new Date());
-  if (time.includes('seconds') && parseInt(time) <= 30) {
-    return 'Now';
-  }
-  return time;
-};
+export const avatarStyles = 'mr-2.5 w-10 h-10 min-w-10 min-h-10';
+
+export const getUsersString = (
+  users: ChatUserBriefResponse[] | null | undefined,
+  exceptionId?: string,
+): string | null | undefined =>
+  users &&
+  users
+    .flatMap((user) => (user.id === exceptionId ? [] : user.username))
+    .join(', ');
