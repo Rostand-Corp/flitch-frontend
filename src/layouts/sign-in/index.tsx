@@ -1,6 +1,9 @@
 import { useFormik } from 'formik';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
 
+import { AuthAPI } from '@api/index';
 import AuthLayout from '@components/auth-layout';
 import Button from '@components/button';
 import Checkbox from '@components/checkbox';
@@ -12,12 +15,22 @@ import { getError } from '@utils/formik-helpers';
 
 import { FormValues, initialValues, schema } from './utils';
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
+  const router = useRouter();
+
+  const handleSubmit = (data: FormValues) =>
+    AuthAPI.authLoginPost({ loginRequest: data }).then((data) =>
+      signIn('credentials', {
+        ...data,
+        redirect: false,
+      }).then(() => router.push(routes.home)),
+    );
+
   const formik = useFormik<FormValues>({
     initialValues,
     validationSchema: schema,
     validateOnBlur: false,
-    onSubmit: (data) => console.log(data),
+    onSubmit: handleSubmit,
   });
 
   return (
