@@ -129,7 +129,7 @@ export class AuthApi extends runtime.BaseAPI {
   async authForgotPasswordPostRaw(
     requestParameters: AuthForgotPasswordPostRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
+  ): Promise<runtime.ApiResponse<object>> {
     const queryParameters: any = {};
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -155,7 +155,7 @@ export class AuthApi extends runtime.BaseAPI {
       initOverrides,
     );
 
-    return new runtime.VoidApiResponse(response);
+    return new runtime.JSONApiResponse<any>(response);
   }
 
   /**
@@ -164,8 +164,12 @@ export class AuthApi extends runtime.BaseAPI {
   async authForgotPasswordPost(
     requestParameters: AuthForgotPasswordPostRequest = {},
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.authForgotPasswordPostRaw(requestParameters, initOverrides);
+  ): Promise<object> {
+    const response = await this.authForgotPasswordPostRaw(
+      requestParameters,
+      initOverrides,
+    );
+    return await response.value();
   }
 
   /**
@@ -275,7 +279,7 @@ export class AuthApi extends runtime.BaseAPI {
    */
   async authResendConfirmationGetRaw(
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
+  ): Promise<runtime.ApiResponse<object>> {
     const queryParameters: any = {};
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -298,7 +302,7 @@ export class AuthApi extends runtime.BaseAPI {
       initOverrides,
     );
 
-    return new runtime.VoidApiResponse(response);
+    return new runtime.JSONApiResponse<any>(response);
   }
 
   /**
@@ -306,8 +310,9 @@ export class AuthApi extends runtime.BaseAPI {
    */
   async authResendConfirmationGet(
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.authResendConfirmationGetRaw(initOverrides);
+  ): Promise<object> {
+    const response = await this.authResendConfirmationGetRaw(initOverrides);
+    return await response.value();
   }
 
   /**
@@ -316,7 +321,7 @@ export class AuthApi extends runtime.BaseAPI {
   async authResetForgotPasswordPostRaw(
     requestParameters: AuthResetForgotPasswordPostRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
+  ): Promise<runtime.ApiResponse<object>> {
     const queryParameters: any = {};
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -344,7 +349,7 @@ export class AuthApi extends runtime.BaseAPI {
       initOverrides,
     );
 
-    return new runtime.VoidApiResponse(response);
+    return new runtime.JSONApiResponse<any>(response);
   }
 
   /**
@@ -353,8 +358,12 @@ export class AuthApi extends runtime.BaseAPI {
   async authResetForgotPasswordPost(
     requestParameters: AuthResetForgotPasswordPostRequest = {},
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.authResetForgotPasswordPostRaw(requestParameters, initOverrides);
+  ): Promise<object> {
+    const response = await this.authResetForgotPasswordPostRaw(
+      requestParameters,
+      initOverrides,
+    );
+    return await response.value();
   }
 
   /**
@@ -363,7 +372,7 @@ export class AuthApi extends runtime.BaseAPI {
   async authResetPasswordPostRaw(
     requestParameters: AuthResetPasswordPostRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
+  ): Promise<runtime.ApiResponse<object>> {
     const queryParameters: any = {};
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -389,7 +398,7 @@ export class AuthApi extends runtime.BaseAPI {
       initOverrides,
     );
 
-    return new runtime.VoidApiResponse(response);
+    return new runtime.JSONApiResponse<any>(response);
   }
 
   /**
@@ -398,8 +407,12 @@ export class AuthApi extends runtime.BaseAPI {
   async authResetPasswordPost(
     requestParameters: AuthResetPasswordPostRequest = {},
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.authResetPasswordPostRaw(requestParameters, initOverrides);
+  ): Promise<object> {
+    const response = await this.authResetPasswordPostRaw(
+      requestParameters,
+      initOverrides,
+    );
+    return await response.value();
   }
 
   /**

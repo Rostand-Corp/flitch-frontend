@@ -17,6 +17,7 @@ models/CreateGroupChatRequest.ts
 models/CreatePrivateChatRequest.ts
 models/ForgotPassRequest.ts
 models/JwtResult.ts
+models/LoginModel.ts
 models/LoginRequest.ts
 models/MessageBriefViewResponse.ts
 models/MessageReplyResponse.ts

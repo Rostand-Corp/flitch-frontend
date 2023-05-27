@@ -14,6 +14,7 @@ export * from './CreateGroupChatRequest';
 export * from './CreatePrivateChatRequest';
 export * from './ForgotPassRequest';
 export * from './JwtResult';
+export * from './LoginModel';
 export * from './LoginRequest';
 export * from './MessageBriefViewResponse';
 export * from './MessageReplyResponse';

@@ -24,7 +24,7 @@ export interface LoginModel {
    * @type {string}
    * @memberof LoginModel
    */
-  username: string;
+  email: string;
   /**
    *
    * @type {string}
@@ -38,7 +38,7 @@ export interface LoginModel {
  */
 export function instanceOfLoginModel(value: object): boolean {
   let isInstance = true;
-  isInstance = isInstance && 'username' in value;
+  isInstance = isInstance && 'email' in value;
   isInstance = isInstance && 'password' in value;
 
   return isInstance;
@@ -56,7 +56,7 @@ export function LoginModelFromJSONTyped(
     return json;
   }
   return {
-    username: json['username'],
+    email: json['email'],
     password: json['password'],
   };
 }
@@ -69,7 +69,7 @@ export function LoginModelToJSON(value?: LoginModel | null): any {
     return null;
   }
   return {
-    username: value.username,
+    email: value.email,
     password: value.password,
   };
 }
