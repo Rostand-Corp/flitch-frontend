@@ -11,6 +11,7 @@ export default {
 const Template: StoryFn<typeof AuthLayout> = (args) => <AuthLayout {...args} />;
 
 export const Default = Template.bind({});
+
 Default.args = {
   imageSrc: backgroundImage,
   children: <div>Content</div>,

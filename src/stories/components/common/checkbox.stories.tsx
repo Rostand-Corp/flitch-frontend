@@ -10,6 +10,7 @@ export default {
 const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
 
 export const Default = Template.bind({});
+
 Default.args = {
   id: 'checkbox',
 };

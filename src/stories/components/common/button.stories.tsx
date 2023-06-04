@@ -10,12 +10,14 @@ export default {
 const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
+
 Default.args = {
   appearance: 'default',
   children: 'Default Button',
 };
 
 export const Primary = Template.bind({});
+
 Primary.args = {
   appearance: 'primary',
   children: 'Primary Button',
