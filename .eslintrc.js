@@ -58,5 +58,77 @@ module.exports = {
     ],
     'import/no-unresolved': ['error', { ignore: ['.css', '.scss', '.sass'] }],
     'arrow-body-style': 'off',
+    '@typescript-eslint/member-ordering': [
+      'error',
+      {
+        interfaces: {
+          memberTypes: ['field', 'signature', 'method'],
+          order: 'alphabetically',
+        },
+      },
+    ],
+    '@typescript-eslint/padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: ['const', 'let', 'export'],
+      },
+      {
+        blankLine: 'always',
+        prev: ['const', 'let', 'export'],
+        next: '*',
+      },
+      {
+        blankLine: 'any',
+        prev: ['const', 'let', 'export'],
+        next: ['const', 'let', 'export'],
+      },
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: [
+          'if',
+          'class',
+          'for',
+          'do',
+          'while',
+          'switch',
+          'try',
+          'default',
+          'interface',
+        ],
+      },
+      {
+        blankLine: 'always',
+        prev: [
+          'if',
+          'class',
+          'for',
+          'do',
+          'while',
+          'switch',
+          'try',
+          'interface',
+        ],
+        next: '*',
+      },
+      { blankLine: 'always', prev: '*', next: 'return' },
+      {
+        blankLine: 'never',
+        prev: ['case'],
+        next: ['case'],
+      },
+      {
+        blankLine: 'always',
+        prev: ['block-like'],
+        next: ['case'],
+      },
+      {
+        blankLine: 'always',
+        prev: ['block-like', 'expression'],
+        next: ['break'],
+      },
+    ],
   },
 };

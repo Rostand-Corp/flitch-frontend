@@ -10,6 +10,7 @@ export default {
 const Template: StoryFn<typeof Input> = (args) => <Input {...args} />;
 
 export const Primary = Template.bind({});
+
 Primary.args = {
   placeholder: 'Placeholder...',
 };
