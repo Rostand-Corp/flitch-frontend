@@ -13,8 +13,8 @@ interface Props
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  children: React.ReactNode;
   appearance?: ButtonAppearance;
+  children: React.ReactNode;
 }
 
 const Button: React.FC<Props> = ({
